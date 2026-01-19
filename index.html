@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A-Frame Example - Click Interactivity</title>
+    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+</head>
+<body>
+    <a-scene cursor="rayOrigin: mouse">
+        <a-camera>
+            <a-cursor></a-cursor>
+        </a-camera>
+        <a-box 
+            position="-1 0.6 -3" 
+            rotation="0 45 45" 
+            color="#7FFF00"
+            animation="property: position; to: 1 8 -10; dur: 5000; easing: linear; loop: true"
+            onclick="
+                this.setAttribute('color', '#' + Math.floor(Math.random()*16777215).toString(16));
+                this.setAttribute('scale', '1.2 1.2 1.2');
+                setTimeout(() => {this.setAttribute('scale', '1 1 1');}, 300);
+            ">
+        </a-box>
+        <a-sphere 
+            position="1 1.75 -3" 
+            radius="2.1" 
+            color="#FF8C00"
+            animation="property: rotation; to: 0 360 0; dur: 3000; easing: linear; loop: true"
+            onclick="
+                this.setAttribute('color', '#00FF00');
+                this.setAttribute('radius', Math.random() * 2 + 1);
+                setTimeout(() => {this.setAttribute('color', '#EF2D5E');}, 1000);
+            ">
+        </a-sphere>
+        <a-cylinder 
+            position="5 3.75 -6" 
+            radius="0.5" 
+            height="2.5" 
+            color="#40E0D0"
+            animation="property: position; to: 1 0.2 -3; dur: 1500; dir: alternate; easing: easeInOutSine; loop: true"
+            onclick="
+                this.setAttribute('color', '#FF00FF');
+                if(this.getAttribute('animation').dir === 'alternate') {
+                    this.setAttribute('animation', 'dir: normal');
+                } else {
+                    this.setAttribute('animation', 'dir: alternate');
+                }
+                setTimeout(() => {this.setAttribute('color', '#FFC65D');}, 1000);
+            ">
+        </a-cylinder>
+        <a-text 
+            value="Banana" 
+            position="1 1 1" 
+            color="#FF1493"
+            ">
+        </a-text>
+        <a-light 
+            type="point" 
+            position="2 1 1" 
+            intensity="3"
+            ">
+        </a-light>
+		<a-cone 
+            position="-2 1.25 -3" 
+            radius-bottom="1" 
+            height="2" 
+            color="#191970"
+            animation__rotate="property: rotation; to: 0 360 0; dur: 4000; loop: true"
+            animation__pulse="property: scale; to: 1.3 1.3 1.3; dur: 2000; dir: alternate; loop: true"
+            onclick="this.setAttribute('color', '#' + Math.floor(Math.random()*16777215).toString(16))">
+        </a-cone>
+        <a-torus 
+            position="2 3.75 -2" 
+            radius="1" 
+            radius-tubular="0.3" 
+            color="#8A2BE2"
+            animation__rotate="property: rotation; to: 360 720 360; dur: 8000; loop: true"
+            animation__float="property: position; to: 3 2.5 -4; dur: 3000; dir: alternate; loop: true"
+            onclick="this.setAttribute('radius-tubular', Math.random() * 0.5 + 0.1)">
+        </a-torus>
+		<a-sound src="music.mp3" autoplay="true" loop="true" position="-10 1 0"></a-sound>
+		<a-sound src="backgroundmusic.mp3" autoplay="true" loop="true" position="10 1 0"></a-sound>
+    </a-scene>
+</body>
+</html>
